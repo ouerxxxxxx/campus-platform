@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Search, X } from 'lucide-react'
 
 interface SearchBarProps {
   placeholder?: string
@@ -8,24 +9,40 @@ interface SearchBarProps {
 
 export function SearchBar({ placeholder = '搜索...', onSearch, className = '' }: SearchBarProps) {
   const [value, setValue] = useState('')
+  const [focused, setFocused] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     onSearch(value.trim())
   }
 
+  const handleClear = () => {
+    setValue('')
+    onSearch('')
+  }
+
   return (
     <form onSubmit={handleSubmit} className={`relative ${className}`}>
-      <input
-        type="text"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        placeholder={placeholder}
-        className="w-full pl-10 pr-4 py-2.5 bg-gray-100 rounded-2xl text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:bg-white transition-all"
-      />
-      <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>
+      <div className={`
+        flex items-center rounded-xl overflow-hidden transition-all duration-200
+        ${focused ? 'bg-white ring-2 ring-primary/20' : 'bg-[#E5E5EA]/60'}
+      `}>
+        <Search className="w-4 h-4 text-text-tertiary ml-3 flex-shrink-0" strokeWidth={2} />
+        <input
+          type="text"
+          value={value}
+          onChange={e => setValue(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          placeholder={placeholder}
+          className="w-full px-2.5 py-2.5 bg-transparent text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none"
+        />
+        {value && (
+          <button type="button" onClick={handleClear} className="mr-2 p-1 rounded-full hover:bg-gray-300/50 transition-all">
+            <X className="w-4 h-4 text-text-tertiary" strokeWidth={2} />
+          </button>
+        )}
+      </div>
     </form>
   )
 }

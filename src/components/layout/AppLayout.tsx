@@ -1,20 +1,14 @@
-// ============================================================
-// AppLayout - 整体布局包裹器
-// 包含Header + 主内容区 + BottomNav + Toast
-// ============================================================
-
 import { Outlet } from 'react-router-dom'
 import { BottomNav } from './BottomNav'
-import { ToastContainer } from '../common/Toast'
 
 export function AppLayout() {
   return (
-    <div className="min-h-screen bg-bg-primary">
-      <main className="max-w-6xl mx-auto pb-16 md:pb-0">
+    <div className="min-h-screen bg-[#F2F2F7]">
+      {/* 移动端紧凑 / 桌面端放宽 */}
+      <main className="w-full max-w-md md:max-w-3xl mx-auto pb-[60px] md:pb-0 px-4 pt-3">
         <Outlet />
       </main>
       <BottomNav />
-      <ToastContainer />
     </div>
   )
 }

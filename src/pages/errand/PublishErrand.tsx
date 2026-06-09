@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { useStore } from '@/lib/store'
+import { errandApi } from '@/lib/api'
 import type { ErrandCategory } from '@/types'
 
 const categories: { key: ErrandCategory; label: string; icon: string }[] = [
@@ -45,10 +46,31 @@ export default function PublishErrand() {
   const handleSubmit = async () => {
     if (!validate()) return
     setLoading(true)
-    await new Promise(r => setTimeout(r, 800))
+    const { currentUser } = useStore.getState()
+    if (!currentUser?.id) {
+      showToast('请先登录', 'error')
+      setLoading(false)
+      return
+    }
+    const result = await errandApi.create({
+      publisher_id: currentUser.id,
+      title: form.title.trim(),
+      description: form.description.trim(),
+      category: form.category as ErrandCategory,
+      reward: Number(form.reward),
+      pickup_location: form.pickup.trim() || null,
+      pickup_coords: null,
+      delivery_location: form.delivery.trim() || null,
+      delivery_coords: null,
+      deadline: form.deadline || null,
+    })
     setLoading(false)
-    showToast('发布成功！等待同学接单', 'success')
-    nav('/errand', { replace: true })
+    if (result.success) {
+      showToast('发布成功！等待同学接单', 'success')
+      nav('/errand', { replace: true })
+    } else {
+      showToast(result.error || '发布失败', 'error')
+    }
   }
 
   return (

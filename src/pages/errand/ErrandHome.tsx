@@ -24,7 +24,7 @@ const categories: { key: ErrandCategory | 'all'; label: string; icon: string }[]
 
 export default function ErrandHome() {
   const nav = useNavigate()
-  const { showToast } = useStore()
+  const { currentUser, showToast } = useStore()
   const [category, setCategory] = useState<ErrandCategory | 'all'>('all')
   const [keyword, setKeyword] = useState('')
   const [orders, setOrders] = useState<ErrandOrder[]>([])
@@ -119,7 +119,17 @@ export default function ErrandHome() {
                     </div>
                   </div>
                   {order.status === 'open' && (
-                    <button onClick={e => { e.stopPropagation(); showToast('接单成功！请查看详情', 'success') }}
+                    <button onClick={async e => {
+                      e.stopPropagation()
+                      if (!currentUser?.id) return showToast('请先登录', 'error')
+                      const result = await errandApi.accept(order.id, currentUser.id)
+                      if (result.success) {
+                        showToast('接单成功！请查看详情', 'success')
+                        fetchOrders()
+                      } else {
+                        showToast(result.error || '接单失败', 'error')
+                      }
+                    }}
                       className="px-3 py-1.5 bg-primary text-white rounded-xl text-xs font-medium hover:bg-primary-dark active:scale-90 transition-all">
                       接单
                     </button>

@@ -114,7 +114,7 @@ export default function TreeHoleHome() {
           <div className="flex items-center justify-between mt-2">
             <div className="flex gap-1">
               {['😄', '😢', '😤', '🤔', '😊'].map(emoji => (
-                <button key={emoji} className="text-sm px-1.5 py-0.5 rounded hover:bg-gray-100">{emoji}</button>
+                <button key={emoji} onClick={() => setContent(c => c + emoji)} className="text-sm px-1.5 py-0.5 rounded hover:bg-gray-100 active:scale-90 transition-all">{emoji}</button>
               ))}
             </div>
             <div className="flex items-center gap-2">

@@ -1,9 +1,6 @@
-// ============================================================
-// 顶部导航栏
-// ============================================================
-
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/lib/store'
+import { ChevronLeft, GraduationCap } from 'lucide-react'
 
 interface HeaderProps {
   title: string
@@ -16,37 +13,32 @@ export function Header({ title, showBack, rightAction }: HeaderProps) {
   const { currentUser } = useStore()
 
   return (
-    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-border/50 safe-top">
-      <div className="flex items-center justify-between h-12 px-4 max-w-6xl mx-auto">
+    <header className="sticky top-0 z-40 bg-white/[0.92] backdrop-blur-xl border-b border-[#E5E5EA] safe-top">
+      <div className="flex items-center justify-between h-11 px-4 max-w-6xl mx-auto">
         {/* 左侧 */}
-        <div className="flex items-center gap-2 min-w-0">
+        <div className="flex items-center gap-1 min-w-0 w-14">
           {showBack ? (
-            <button onClick={() => navigate(-1)} className="p-1.5 -ml-1.5 rounded-xl hover:bg-gray-100 active:scale-90 transition-all">
-              <svg className="w-5 h-5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
+            <button onClick={() => navigate(-1)} className="p-1 -ml-1 rounded-lg hover:bg-gray-100 active:scale-95 transition-all">
+              <ChevronLeft className="w-5 h-5 text-primary" strokeWidth={2.5} />
             </button>
           ) : (
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
+            <div className="flex items-center gap-1.5">
+              <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
+                <GraduationCap className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
               </div>
-              <span className="font-semibold text-sm text-text-primary truncate">{title}</span>
             </div>
           )}
         </div>
 
-        {/* 标题 */}
-        <h1 className="absolute left-1/2 -translate-x-1/2 text-sm font-semibold text-text-primary min-w-0 max-w-[40%] truncate md:hidden">
+        {/* 中间标题 */}
+        <h1 className="text-[15px] font-semibold text-text-primary tracking-[-0.01em] truncate text-center flex-1">
           {title}
         </h1>
 
         {/* 右侧 */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 w-14 justify-end">
           {rightAction && (
-            <button onClick={rightAction.onClick} className="relative p-1.5 rounded-xl hover:bg-gray-100 active:scale-90 transition-all">
+            <button onClick={rightAction.onClick} className="relative p-1 rounded-lg hover:bg-gray-100 active:scale-95 transition-all">
               <svg className="w-5 h-5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={rightAction.icon} />
               </svg>
@@ -58,9 +50,9 @@ export function Header({ title, showBack, rightAction }: HeaderProps) {
             </button>
           )}
           {currentUser && (
-            <button onClick={() => navigate('/profile')} className="flex items-center gap-1.5 p-1 rounded-xl hover:bg-gray-100 transition-all">
-              <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
-                <span className="text-xs font-semibold text-primary">
+            <button onClick={() => navigate('/profile')} className="flex items-center gap-1 p-0.5 rounded-lg hover:bg-gray-100 transition-all">
+              <div className="w-6 h-6 rounded-full bg-primary-bg flex items-center justify-center">
+                <span className="text-[11px] font-semibold text-primary">
                   {currentUser.nickname?.slice(0, 1) || currentUser.real_name?.slice(0, 1) || '我'}
                 </span>
               </div>

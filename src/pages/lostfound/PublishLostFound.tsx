@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { useStore } from '@/lib/store'
+import { lostFoundApi } from '@/lib/api'
 
 const inputClass = "w-full px-4 py-2.5 rounded-xl border border-border bg-white text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
 
@@ -38,10 +39,31 @@ export default function PublishLostFound() {
   const handleSubmit = async () => {
     if (!validate()) return
     setLoading(true)
-    await new Promise(r => setTimeout(r, 800))
+    const { currentUser } = useStore.getState()
+    if (!currentUser?.id) {
+      showToast('请先登录', 'error')
+      setLoading(false)
+      return
+    }
+    const result = await lostFoundApi.create({
+      user_id: currentUser.id,
+      type,
+      item_name: form.itemName.trim(),
+      description: form.description.trim(),
+      images: [],
+      location: form.location.trim(),
+      location_coords: null,
+      lost_found_date: form.date,
+      contact_info: form.contact.trim(),
+      status: 'open',
+    })
     setLoading(false)
-    showToast('发布成功！', 'success')
-    nav('/lostfound', { replace: true })
+    if (result.success) {
+      showToast('发布成功！', 'success')
+      nav('/lostfound', { replace: true })
+    } else {
+      showToast(result.error || '发布失败', 'error')
+    }
   }
 
   return (

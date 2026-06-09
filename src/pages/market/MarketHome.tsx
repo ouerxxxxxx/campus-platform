@@ -72,7 +72,7 @@ export default function MarketHome() {
       items.length === 0 ? (
         <EmptyState icon="📦" title="暂无相关商品" description={keyword ? `没有找到与"${keyword}"相关的商品` : '该分类下暂无商品'} />
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {items.map(item => (
             <Card key={item.id} onClick={() => nav(`/market/${item.id}`)} padding className="!p-0 overflow-hidden">
               {/* 商品图片（占位） */}

@@ -34,18 +34,36 @@ export default function MarketDetail() {
   const seller = item.seller
   const statusInfo = getStatusLabel(item.status)
 
-  const handleFavorite = () => {
-    setIsFav(!isFav)
-    showToast(isFav ? '已取消收藏' : '已加入收藏', 'success')
+  const handleFavorite = async () => {
+    if (!currentUser?.id || !id) return
+    const result = await favoriteApi.toggle(currentUser.id, 'market_item', id, isFav)
+    if (result.success) {
+      setIsFav(!isFav)
+      showToast(isFav ? '已取消收藏' : '已加入收藏', 'success')
+    }
   }
 
-  const handleContact = () => {
+  const handleContact = async () => {
+    if (!currentUser?.id || !item.seller_id) return
+    const { messageApi } = await import('@/lib/api')
+    await messageApi.send({
+      sender_id: currentUser.id,
+      receiver_id: item.seller_id,
+      content: `我对你的商品「${item.title}」感兴趣，请问还在吗？`,
+      related_item_id: id,
+    })
     setShowContact(true)
-    showToast('已向卖家发送私信通知', 'info')
+    showToast('已向卖家发送私信', 'info')
   }
 
-  const handleMarkSold = () => {
-    showToast('已标记为已售出', 'success')
+  const handleMarkSold = async () => {
+    if (!id) return
+    const newStatus = item.status === 'active' ? 'sold' : 'active'
+    const result = await marketApi.update(id, { status: newStatus })
+    if (result.success) {
+      setItem(prev => prev ? { ...prev, status: newStatus } : null)
+      showToast(newStatus === 'sold' ? '已标记为已售出' : '已重新上架', 'success')
+    }
   }
 
   return (

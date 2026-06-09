@@ -1,7 +1,3 @@
-// ============================================================
-// Button 按钮组件 - shadcn/ui风格
-// ============================================================
-
 import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -11,17 +7,17 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles = {
-  primary: 'bg-primary text-white hover:bg-primary-dark active:bg-primary-dark shadow-sm',
-  secondary: 'bg-secondary text-white hover:bg-secondary-light active:bg-secondary-light shadow-sm',
-  outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white active:bg-primary-dark',
-  ghost: 'text-text-secondary hover:bg-gray-100 active:bg-gray-200',
-  danger: 'bg-danger text-white hover:bg-red-600 active:bg-red-700 shadow-sm',
+  primary: 'bg-primary text-white hover:bg-primary-dark active:bg-primary-dark',
+  secondary: 'bg-primary-bg text-primary hover:bg-primary-light/20 active:bg-primary-light/30',
+  outline: 'border border-border bg-white text-text-primary hover:bg-gray-50 active:bg-gray-100',
+  ghost: 'text-primary hover:bg-primary-bg active:bg-primary-light/30',
+  danger: 'bg-danger text-white hover:bg-red-600 active:bg-red-700',
 }
 
 const sizeStyles = {
-  sm: 'px-3 py-1.5 text-sm rounded-lg',
+  sm: 'px-3 py-1.5 text-xs rounded-[10px]',
   md: 'px-5 py-2.5 text-sm rounded-xl',
-  lg: 'px-6 py-3 text-base rounded-xl',
+  lg: 'px-6 py-3.5 text-[15px] rounded-xl',
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -30,10 +26,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'inline-flex items-center justify-center font-medium transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          'active:scale-[0.97]',
+          'inline-flex items-center justify-center font-semibold transition-all duration-200',
+          'focus:outline-none focus:ring-2 focus:ring-primary/30',
+          'disabled:opacity-40 disabled:cursor-not-allowed',
+          'active:scale-[0.98]',
           variantStyles[variant],
           sizeStyles[size],
           className

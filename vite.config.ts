@@ -15,7 +15,7 @@ export default defineConfig({
         name: '校园综合服务平台',
         short_name: '校园平台',
         description: '一站式校园生活服务平台',
-        theme_color: '#165DFF',
+        theme_color: '#007AFF',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',

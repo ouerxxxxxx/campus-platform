@@ -11,7 +11,7 @@ import { useStore } from '@/lib/store'
 export default function Login() {
   const nav = useNavigate()
   const { login, showToast } = useStore()
-  const [studentId, setStudentId] = useState('2024001')
+  const [studentId, setStudentId] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<{ id?: string; pw?: string }>({})

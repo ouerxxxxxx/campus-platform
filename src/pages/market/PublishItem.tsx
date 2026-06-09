@@ -8,7 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { useStore } from '@/lib/store'
-import type { MarketCategory } from '@/types'
+import { marketApi } from '@/lib/api'
+import type { MarketCategory, MarketItem } from '@/types'
 
 const categories: { key: MarketCategory; label: string }[] = [
   { key: '数码', label: '💻 数码' },
@@ -50,11 +51,31 @@ export default function PublishItem() {
   const handleSubmit = async () => {
     if (!validate()) return
     setLoading(true)
-    // 模拟提交
-    await new Promise(r => setTimeout(r, 1000))
+    const { currentUser } = useStore.getState()
+    if (!currentUser?.id) {
+      showToast('请先登录', 'error')
+      setLoading(false)
+      return
+    }
+    const result = await marketApi.create({
+      seller_id: currentUser.id,
+      title: form.title.trim(),
+      description: form.description.trim(),
+      price: Number(form.price),
+      original_price: form.originalPrice ? Number(form.originalPrice) : null,
+      category: form.category as MarketCategory,
+      condition: form.condition as MarketItem['condition'],
+      location: form.location.trim(),
+      images: [],
+      status: 'active',
+    })
     setLoading(false)
-    showToast('发布成功！', 'success')
-    nav('/market', { replace: true })
+    if (result.success) {
+      showToast('发布成功！', 'success')
+      nav('/market', { replace: true })
+    } else {
+      showToast(result.error || '发布失败', 'error')
+    }
   }
 
   const inputClass = "w-full px-4 py-2.5 rounded-xl border border-border bg-white text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"

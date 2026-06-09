@@ -96,14 +96,20 @@ export const useStore = create<AppState>((set, get) => ({
     set({ isLoggedIn: false, currentUser: null })
   },
 
-  /** 更新个人资料 */
+  /** 更新个人资料（乐观更新 + 失败回滚） */
   updateProfile: async (data) => {
     const user = get().currentUser
     if (!user) return
-    // 先更新本地状态（乐观更新）
+    const prevUser = { ...user }
+    // 乐观更新
     set({ currentUser: { ...user, ...data, updated_at: new Date().toISOString() } })
     // 调用 API 持久化
-    await updateProfileApi(user.id, data)
+    const result = await updateProfileApi(user.id, data)
+    if (!result.success) {
+      // 回滚
+      set({ currentUser: prevUser })
+      get().showToast('保存失败，请重试', 'error')
+    }
   },
 
   // Toast管理

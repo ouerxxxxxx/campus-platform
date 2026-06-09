@@ -36,7 +36,7 @@ export default function EditProfile() {
         <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-3xl font-bold text-white mb-2">
           {(currentUser?.nickname || currentUser?.real_name || '我').slice(0, 1)}
         </div>
-        <button className="text-sm text-primary font-medium">更换头像</button>
+        <button onClick={() => showToast('头像上传功能即将上线', 'info')} className="text-sm text-primary font-medium">更换头像</button>
       </div>
 
       <Input label="昵称" placeholder="给自己起个昵称" value={form.nickname} onChange={update('nickname')} />

@@ -12,9 +12,9 @@ export function Card({ children, className, onClick, padding = true }: CardProps
     <div
       onClick={onClick}
       className={cn(
-        'bg-white rounded-2xl border border-border/50',
+        'bg-white rounded-[16px] border border-[#E5E5EA]',
         'transition-all duration-200',
-        onClick && 'cursor-pointer hover:shadow-md active:scale-[0.98]',
+        onClick && 'cursor-pointer hover:bg-[#F9F9FB] active:scale-[0.99]',
         padding && 'p-4',
         className
       )}
@@ -29,5 +29,5 @@ export function CardHeader({ children, className }: { children: React.ReactNode;
 }
 
 export function CardTitle({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <h3 className={cn('text-base font-semibold text-text-primary', className)}>{children}</h3>
+  return <h3 className={cn('text-base font-semibold text-text-primary tracking-[-0.01em]', className)}>{children}</h3>
 }

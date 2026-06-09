@@ -33,12 +33,49 @@ export default function ErrandDetail() {
   const isRunner = currentUser?.id === order.runner_id
   const statusInfo = getStatusLabel(order.status)
 
-  const handleAccept = () => {
-    showToast('接单成功！请尽快完成任务', 'success')
+  const handleAccept = async () => {
+    if (!currentUser?.id || !id) return
+    const result = await errandApi.accept(id, currentUser.id)
+    if (result.success) {
+      setOrder(prev => prev ? { ...prev, status: 'accepted' as const, runner_id: currentUser.id } : null)
+      showToast('接单成功！请尽快完成任务', 'success')
+    } else {
+      showToast('接单失败，请重试', 'error')
+    }
   }
 
-  const handleComplete = () => {
-    showToast('订单已确认完成', 'success')
+  const handleComplete = async () => {
+    if (!id) return
+    const result = await errandApi.complete(id)
+    if (result.success) {
+      setOrder(prev => prev ? { ...prev, status: 'completed' as const } : null)
+      showToast('订单已确认完成', 'success')
+    } else {
+      showToast('操作失败，请重试', 'error')
+    }
+  }
+
+  const handleCancel = async () => {
+    if (!id) return
+    const result = await errandApi.cancel(id)
+    if (result.success) {
+      setOrder(prev => prev ? { ...prev, status: 'cancelled' as const } : null)
+      showToast('订单已取消', 'info')
+    }
+  }
+
+  const handleReview = async () => {
+    if (!currentUser?.id || !id || !order?.runner_id || rating === 0) return
+    const revieweeId = isPublisher ? order.runner_id : order.publisher_id
+    const result = await errandApi.addReview({
+      order_id: id,
+      reviewer_id: currentUser.id,
+      reviewee_id: revieweeId,
+      rating,
+    })
+    if (result.success) {
+      showToast('评价已提交', 'success')
+    }
   }
 
   return (
@@ -130,7 +167,7 @@ export default function ErrandDetail() {
             ))}
           </div>
           <textarea className="w-full px-3 py-2 rounded-xl border border-border text-sm" rows={2} placeholder="写下你的评价..." />
-          <Button size="sm" className="mt-2" onClick={() => showToast('评价已提交', 'success')}>提交评价</Button>
+          <Button size="sm" className="mt-2" onClick={handleReview}>提交评价</Button>
         </Card>
       )}
 
@@ -143,7 +180,7 @@ export default function ErrandDetail() {
           <Button onClick={handleComplete} className="flex-1">确认完成</Button>
         )}
         {isPublisher && order.status === 'open' && (
-          <Button variant="outline" className="flex-1" onClick={() => showToast('已取消', 'info')}>取消订单</Button>
+          <Button variant="outline" className="flex-1" onClick={handleCancel}>取消订单</Button>
         )}
         <Button variant="outline" onClick={() => nav('/errand')} className="flex-shrink-0">
           返回列表

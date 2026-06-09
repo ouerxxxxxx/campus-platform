@@ -32,8 +32,13 @@ export default function LostFoundDetail() {
   const typeInfo = getStatusLabel(item.type)
   const user = item.user
 
-  const handleResolve = () => {
-    showToast('已标记为已解决', 'success')
+  const handleResolve = async () => {
+    if (!id) return
+    const result = await lostFoundApi.markResolved(id)
+    if (result.success) {
+      setItem(prev => prev ? { ...prev, status: 'resolved' as const } : null)
+      showToast('已标记为已解决', 'success')
+    }
   }
 
   return (

@@ -12,7 +12,18 @@ export default function Profile() {
   const nav = useNavigate()
   const { currentUser, logout, showToast } = useStore()
 
-  if (!currentUser) return null
+  if (!currentUser) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20">
+        <span className="text-5xl mb-4">👤</span>
+        <h3 className="text-base font-semibold text-text-primary mb-2">请先登录</h3>
+        <p className="text-sm text-text-tertiary mb-4">登录后即可查看个人中心</p>
+        <button onClick={() => nav('/login')} className="px-5 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary-dark transition-all">
+          去登录
+        </button>
+      </div>
+    )
+  }
 
   const menuGroups = [
     {

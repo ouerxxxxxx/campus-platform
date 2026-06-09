@@ -40,13 +40,17 @@ export default function TreeHoleDetail() {
 
   const totalLikes = post.likes_count + likesCount
 
-  const handleLike = () => {
-    if (liked) {
-      setLiked(false)
-      setLikesCount(c => c - 1)
-    } else {
-      setLiked(true)
-      setLikesCount(c => c + 1)
+  const handleLike = async () => {
+    if (!currentUser?.id || !id) return
+    const result = await treeholeApi.toggleLike(id, currentUser.id)
+    if (result.success) {
+      if (liked) {
+        setLiked(false)
+        setLikesCount(c => c - 1)
+      } else {
+        setLiked(true)
+        setLikesCount(c => c + 1)
+      }
     }
   }
 
