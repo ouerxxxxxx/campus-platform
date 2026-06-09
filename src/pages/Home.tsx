@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { marketApi, newsApi, treeholeApi } from '@/lib/api'
+import { useStore } from '@/lib/store'
+import { Button } from '@/components/ui/button'
 import type { MarketItem, NewsArticle, TreeHolePost } from '@/types'
 import { formatPrice, formatDate, getCategoryColor } from '@/lib/utils'
 
@@ -24,6 +26,7 @@ function QuickEntry({ icon, label, color, path }: { icon: string; label: string;
 
 export default function Home() {
   const nav = useNavigate()
+  const { isLoggedIn, currentUser } = useStore()
   const [marketItems, setMarketItems] = useState<MarketItem[]>([])
   const [newsItems, setNewsItems] = useState<NewsArticle[]>([])
   const [treeholeItems, setTreeholeItems] = useState<TreeHolePost[]>([])
@@ -46,8 +49,21 @@ export default function Home() {
       {/* 顶部Banner */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary-light p-5 text-white">
         <div className="relative z-10">
-          <h1 className="text-lg font-bold mb-1">👋 欢迎回来</h1>
-          <p className="text-sm text-white/80">一站式校园生活服务，让校园生活更便捷</p>
+          {isLoggedIn && currentUser ? (
+            <>
+              <h1 className="text-lg font-bold mb-1">👋 欢迎回来，{currentUser.nickname || currentUser.real_name}</h1>
+              <p className="text-sm text-white/80">{currentUser.major} · {currentUser.grade} · 信誉分 {currentUser.points}</p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-lg font-bold mb-1">🎓 校园综合服务平台</h1>
+              <p className="text-sm text-white/80 mb-3">一站式校园生活服务，请先登录或注册</p>
+              <div className="flex gap-2">
+                <button onClick={() => nav('/login')} className="px-4 py-1.5 bg-white text-primary rounded-xl text-sm font-bold hover:bg-white/90 active:scale-95 transition-all">登录</button>
+                <button onClick={() => nav('/register')} className="px-4 py-1.5 bg-white/20 text-white rounded-xl text-sm font-medium hover:bg-white/30 active:scale-95 transition-all">注册</button>
+              </div>
+            </>
+          )}
         </div>
         <div className="absolute right-2 top-2 w-20 h-20 rounded-full bg-white/10" />
         <div className="absolute right-8 bottom-2 w-12 h-12 rounded-full bg-white/5" />

@@ -51,22 +51,10 @@ export const useStore = create<AppState>((set, get) => ({
       if (user) {
         set({ isLoggedIn: true, currentUser: user, isAuthLoading: false })
       } else {
-        // 无会话时自动用演示账号登录（开发模式）
-        const result = await authApi.signIn('2024001', '')
-        if (result.success && result.user) {
-          set({ isLoggedIn: true, currentUser: result.user, isAuthLoading: false })
-        } else {
-          set({ isAuthLoading: false })
-        }
+        // 没有会话 → 显示登录/注册页
+        set({ isAuthLoading: false })
       }
     } catch {
-      // 完全离线或出错时，使用本地 mock 数据
-      try {
-        const result = await authApi.signIn('2024001', '')
-        if (result.success && result.user) {
-          set({ isLoggedIn: true, currentUser: result.user })
-        }
-      } catch {}
       set({ isAuthLoading: false })
     }
   },

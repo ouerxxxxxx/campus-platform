@@ -8,6 +8,7 @@ import { AppLayout } from '@/components/layout/AppLayout'
 import { Header } from '@/components/layout/Header'
 import { ToastContainer } from '@/components/common/Toast'
 import { useStore } from '@/lib/store'
+import { isSupabaseConfigured } from '@/lib/supabase'
 
 import Home from '@/pages/Home'
 import Login from '@/pages/auth/Login'
@@ -48,10 +49,17 @@ function PageWrap({ title, showBack, rightAction, children }: {
 export default function App() {
   const { isLoggedIn, initAuth } = useStore()
 
-  // 初始化认证：优先恢复会话，失败则自动用演示账号
+  // 初始化认证：Supabase已配置→恢复会话；未配置→演示账号自动登录
   useEffect(() => {
     if (!isLoggedIn) {
-      initAuth()
+      if (isSupabaseConfigured()) {
+        // 真实环境：恢复已有会话，不强制自动登录
+        initAuth()
+      } else {
+        // Mock 模式：演示账号自动登录
+        const timer = setTimeout(() => useStore.getState().login('2024001', ''), 300)
+        return () => clearTimeout(timer)
+      }
     }
   }, [])
 
