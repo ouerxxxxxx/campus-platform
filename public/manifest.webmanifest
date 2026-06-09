@@ -1,0 +1,45 @@
+{
+  "name": "校园综合服务平台",
+  "short_name": "校园平台",
+  "description": "一站式校园生活服务平台 - 二手交易、失物招领、跑腿、树洞",
+  "theme_color": "#165DFF",
+  "background_color": "#F7F8FA",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["education", "social", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "二手市场",
+      "short_name": "二手",
+      "url": "/market",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "校园树洞",
+      "short_name": "树洞",
+      "url": "/treehole",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
