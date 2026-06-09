@@ -10,11 +10,13 @@ import { SearchBar } from '@/components/common/SearchBar'
 import { EmptyState } from '@/components/common/EmptyState'
 import { Loading } from '@/components/common/Loading'
 import { lostFoundApi } from '@/lib/api'
+import { useStore } from '@/lib/store'
 import type { LostFoundItem } from '@/types'
 import { formatDate, getStatusLabel } from '@/lib/utils'
 
 export default function LostFoundHome() {
   const nav = useNavigate()
+  const { showToast } = useStore()
   const [tab, setTab] = useState<'all' | 'lost' | 'found'>('all')
   const [keyword, setKeyword] = useState('')
   const [items, setItems] = useState<LostFoundItem[]>([])

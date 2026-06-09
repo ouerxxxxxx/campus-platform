@@ -10,6 +10,7 @@ import { SearchBar } from '@/components/common/SearchBar'
 import { EmptyState } from '@/components/common/EmptyState'
 import { Loading } from '@/components/common/Loading'
 import { errandApi } from '@/lib/api'
+import { useStore } from '@/lib/store'
 import type { ErrandOrder, ErrandCategory } from '@/types'
 import { formatPrice, formatDate, getStatusLabel } from '@/lib/utils'
 
@@ -23,6 +24,7 @@ const categories: { key: ErrandCategory | 'all'; label: string; icon: string }[]
 
 export default function ErrandHome() {
   const nav = useNavigate()
+  const { showToast } = useStore()
   const [category, setCategory] = useState<ErrandCategory | 'all'>('all')
   const [keyword, setKeyword] = useState('')
   const [orders, setOrders] = useState<ErrandOrder[]>([])

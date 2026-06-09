@@ -21,7 +21,7 @@ const moods = [
   { key: '求助', label: '求助', icon: '🤔' },
 ]
 
-const sortOptions = [
+const sortOptions: { key: 'latest' | 'hot'; label: string }[] = [
   { key: 'latest', label: '最新' },
   { key: 'hot', label: '最热' },
 ]
