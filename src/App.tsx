@@ -47,7 +47,7 @@ function PageWrap({ title, showBack, rightAction, children }: {
 }
 
 export default function App() {
-  const { isLoggedIn, initAuth } = useStore()
+  const { isLoggedIn, isAuthLoading, initAuth } = useStore()
 
   // 初始化认证：Supabase已配置→恢复会话；未配置→演示账号自动登录
   useEffect(() => {
@@ -63,8 +63,19 @@ export default function App() {
     }
   }, [])
 
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg-primary">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+          <p className="text-sm text-text-tertiary">加载中...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/campus-platform">
       <Routes>
         {/* 认证页 */}
         <Route path="/login" element={<PageWrap title="登录" showBack><Login /></PageWrap>} />
