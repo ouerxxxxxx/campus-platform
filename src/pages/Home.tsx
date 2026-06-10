@@ -77,8 +77,8 @@ export default function Home() {
             <div className="w-14 h-14 rounded-2xl bg-primary-bg flex items-center justify-center mx-auto mb-3">
               <GraduationCap className="w-7 h-7 text-primary" strokeWidth={2} />
             </div>
-            <h1 className="text-[17px] font-bold text-text-primary mb-1">校园综合服务平台</h1>
-            <p className="text-sm text-text-tertiary mb-4">一站式校园生活服务</p>
+            <h1 className="text-[17px] font-bold text-text-primary mb-1">苏州科技大学</h1>
+            <p className="text-sm text-text-tertiary mb-4">校园综合服务平台</p>
             <div className="flex gap-2 justify-center">
               <Button variant="primary" size="sm" onClick={() => nav('/login')}>登录</Button>
               <Button variant="outline" size="sm" onClick={() => nav('/register')}>注册</Button>

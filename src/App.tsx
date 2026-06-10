@@ -75,7 +75,7 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter basename="/campus-platform">
+    <BrowserRouter>
       <Routes>
         {/* 认证页 */}
         <Route path="/login" element={<PageWrap title="登录" showBack><Login /></PageWrap>} />

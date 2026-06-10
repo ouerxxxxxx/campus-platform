@@ -117,7 +117,7 @@ export default function Profile() {
       </Button>
 
       <div className="text-center pb-4">
-        <p className="text-xs text-text-tertiary">校园综合服务平台 v1.0.0</p>
+        <p className="text-xs text-text-tertiary">苏州科技大学校园综合服务平台 v1.0.0</p>
       </div>
     </div>
   )
