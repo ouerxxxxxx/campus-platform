@@ -51,12 +51,12 @@ export default function Home() {
 
   return (
     <div className="space-y-6 pb-2">
-      {/* 顶部 Banner — 苏科大品牌 */}
+      {/* 顶部 Banner — 苏州科技大学品牌 */}
       {isLoggedIn && currentUser ? (
         <Card className="!p-5 !border-0 !rounded-[20px] bg-white">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <img src="/favicon.svg" alt="苏科大" className="w-11 h-11 rounded-xl shadow-sm shadow-primary/20" />
+              <img src="/favicon.svg" alt="苏州科技大学" className="w-11 h-11 rounded-xl shadow-sm shadow-primary/20" />
               <div>
                 <h1 className="text-[17px] font-bold text-text-primary leading-tight tracking-[-0.01em]">
                   你好，{currentUser.nickname || currentUser.real_name}
@@ -73,7 +73,7 @@ export default function Home() {
         </Card>
       ) : (
         <Card className="!p-6 !border-0 !rounded-[20px] bg-white text-center">
-          {/* 苏科大校徽 Logo */}
+          {/* 苏州科技大学校徽 Logo */}
           <img src="/favicon.svg" alt="苏州科技大学" className="w-16 h-16 mx-auto mb-4 rounded-2xl shadow-sm shadow-primary/20" />
           <h1 className="text-lg font-bold text-text-primary mb-1">苏州科技大学校园综合服务平台</h1>
           <p className="text-xs text-text-tertiary/60 mb-4">二手市场 · 失物招领 · 跑腿 · 树洞 · 校园资讯</p>

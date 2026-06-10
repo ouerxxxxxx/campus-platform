@@ -14,9 +14,9 @@ export default defineConfig({
       includeAssets: ['favicon.svg', 'icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
         name: '苏州科技大学校园综合服务平台',
-        short_name: '苏科大校园',
+        short_name: '苏州科技大学',
         description: '苏州科技大学校园综合服务平台 — 二手市场、失物招领、跑腿、树洞、校园资讯',
-        theme_color: '#007AFF',
+        theme_color: '#008CD6',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',

@@ -1,23 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#007AFF"/>
-      <stop offset="100%" stop-color="#004DCC"/>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#008CD6"/>
+      <stop offset="100%" stop-color="#0069A3"/>
     </linearGradient>
   </defs>
-  <!-- 圆形背景 -->
-  <circle cx="60" cy="60" r="58" fill="url(#bg)"/>
-  <!-- 白环 -->
-  <circle cx="60" cy="60" r="58" fill="none" stroke="white" stroke-width="2" opacity="0.4"/>
-  <circle cx="60" cy="60" r="46" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
-  <!-- 门楼建筑 - 苏科大校门象征 -->
-  <rect x="35" y="62" width="50" height="22" rx="2" fill="white"/>
-  <rect x="44" y="62" width="10" height="22" fill="url(#bg)"/>
-  <rect x="66" y="62" width="10" height="22" fill="url(#bg)"/>
-  <!-- 门楣 -->
-  <rect x="32" y="56" width="56" height="8" rx="2" fill="white"/>
-  <!-- 屋顶 -->
-  <polygon points="30,56 60,40 90,56" fill="white"/>
-  <!-- 苏字 -->
-  <text x="60" y="53" text-anchor="middle" font-size="20" font-weight="bold" fill="white" font-family="STSong,SimSun,serif" letter-spacing="2">苏科大</text>
+  <!-- 外环 -->
+  <circle cx="100" cy="100" r="96" fill="none" stroke="url(#blueGrad)" stroke-width="8"/>
+  <circle cx="100" cy="100" r="88" fill="none" stroke="url(#blueGrad)" stroke-width="1.5" opacity="0.5"/>
+  <!-- 内环 -->
+  <circle cx="100" cy="100" r="72" fill="none" stroke="url(#blueGrad)" stroke-width="2" opacity="0.6"/>
+  <!-- 上半弧：SUZHOU UNIVERSITY OF -->
+  <path id="top-arc" d="M 28 100 A 72 72 0 0 1 172 100" fill="none"/>
+  <text font-size="10" font-family="Arial,Helvetica,sans-serif" fill="#202124" font-weight="bold" letter-spacing="2.2">
+    <textPath href="#top-arc" startOffset="50%" text-anchor="middle">SUZHOU UNIVERSITY OF</textPath>
+  </text>
+  <!-- 下半弧：SCIENCE AND TECHNOLOGY -->
+  <path id="bot-arc" d="M 172 100 A 72 72 0 0 1 28 100" fill="none"/>
+  <text font-size="10" font-family="Arial,Helvetica,sans-serif" fill="#202124" font-weight="bold" letter-spacing="2.2">
+    <textPath href="#bot-arc" startOffset="50%" text-anchor="middle">SCIENCE AND TECHNOLOGY</textPath>
+  </text>
+  <!-- 中心 S 抽象造型（上升态） -->
+  <g transform="translate(100,100)">
+    <path d="M -18 28 C -38 20 -42 -2 -25 -14 C -8 -26 12 -24 22 -8 C 32 8 25 22 5 27"
+          fill="none" stroke="url(#blueGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="-25" cy="-14" r="3.5" fill="url(#blueGrad)" opacity="0.4"/>
+    <circle cx="22" cy="-8" r="3.5" fill="url(#blueGrad)" opacity="0.4"/>
+  </g>
+  <!-- 底部中文校名 -->
+  <text x="100" y="175" text-anchor="middle" font-size="16" font-family="SimHei,PingFang SC,Microsoft YaHei,sans-serif" fill="#202124" font-weight="bold" letter-spacing="6">苏州科技大学</text>
 </svg>

@@ -9,7 +9,7 @@ export function AppLayout() {
       </main>
       {/* 底部品牌标识（桌面端可见） */}
       <footer className="hidden md:flex items-center justify-center gap-2 py-4 text-xs text-text-tertiary/50">
-        <img src="/favicon.svg" alt="苏科大" className="w-4 h-4 rounded" />
+        <img src="/favicon.svg" alt="苏州科技大学" className="w-4 h-4 rounded" />
         苏州科技大学校园综合服务平台
       </footer>
       <BottomNav />

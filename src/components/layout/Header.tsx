@@ -8,15 +8,12 @@ interface HeaderProps {
   rightAction?: { icon: string; onClick: () => void; badge?: number }
 }
 
-/** 苏科大 Logo */
+/** 苏州科技大学 Logo */
 function SustLogo() {
   return (
     <div className="flex items-center gap-1.5">
-      <img src="/favicon.svg" alt="苏科大" className="w-7 h-7 rounded-lg shadow-sm shadow-primary/20" />
-      <div className="flex flex-col leading-none">
-        <span className="text-[11px] font-semibold text-text-primary tracking-tight">苏科大</span>
-        <span className="text-[9px] text-text-tertiary">校园平台</span>
-      </div>
+      <img src="/favicon.svg" alt="苏州科技大学" className="w-7 h-7 rounded-lg shadow-sm shadow-primary/20" />
+      <span className="text-[11px] font-semibold text-text-primary tracking-tight">苏州科技大学</span>
     </div>
   )
 }
@@ -29,7 +26,7 @@ export function Header({ title, showBack, rightAction }: HeaderProps) {
     <header className="sticky top-0 z-40 bg-white/[0.92] backdrop-blur-xl border-b border-[#E5E5EA] safe-top">
       <div className="flex items-center justify-between h-11 px-4 max-w-6xl mx-auto">
         {/* 左侧 */}
-        <div className="flex items-center gap-1 min-w-0 w-[72px]">
+        <div className="flex items-center gap-1 min-w-0">
           {showBack ? (
             <button onClick={() => navigate(-1)} className="p-1 -ml-1 rounded-lg hover:bg-gray-100 active:scale-95 transition-all">
               <ChevronLeft className="w-5 h-5 text-primary" strokeWidth={2.5} />
@@ -40,12 +37,12 @@ export function Header({ title, showBack, rightAction }: HeaderProps) {
         </div>
 
         {/* 中间标题 */}
-        <h1 className="text-[15px] font-semibold text-text-primary tracking-[-0.01em] truncate text-center flex-1">
+        <h1 className="text-[15px] font-semibold text-text-primary tracking-[-0.01em] truncate text-center flex-1 px-2">
           {title}
         </h1>
 
         {/* 右侧 */}
-        <div className="flex items-center gap-0.5 w-[72px] justify-end">
+        <div className="flex items-center gap-0.5 justify-end">
           {rightAction && (
             <button onClick={rightAction.onClick} className="relative p-1 rounded-lg hover:bg-gray-100 active:scale-95 transition-all">
               <svg className="w-5 h-5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
