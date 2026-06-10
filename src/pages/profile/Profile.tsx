@@ -116,8 +116,12 @@ export default function Profile() {
         退出登录
       </Button>
 
-      <div className="text-center pb-4">
-        <p className="text-xs text-text-tertiary">苏州科技大学校园综合服务平台 v1.0.0</p>
+      <div className="text-center pb-4 pt-2">
+        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-2">
+          <span className="text-primary text-sm font-bold tracking-tighter">苏</span>
+        </div>
+        <p className="text-xs text-text-tertiary">苏州科技大学校园综合服务平台</p>
+        <p className="text-[10px] text-text-tertiary/60">v1.0.0</p>
       </div>
     </div>
   )

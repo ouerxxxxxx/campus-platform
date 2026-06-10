@@ -7,7 +7,7 @@ import { useStore } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import type { MarketItem, NewsArticle, TreeHolePost } from '@/types'
 import { formatPrice, formatDate } from '@/lib/utils'
-import { ShoppingBag, Search, Bike, MessageCircleMore, Newspaper, Package, ClipboardList, Megaphone, ChevronRight, Sparkles, GraduationCap } from 'lucide-react'
+import { ShoppingBag, Search, Bike, MessageCircleMore, Newspaper, Package, ClipboardList, Megaphone, ChevronRight, Sparkles } from 'lucide-react'
 
 /** 快捷入口 */
 function QuickEntry({ icon: Icon, label, path, color }: { icon: React.ElementType; label: string; path: string; color: string }) {
@@ -51,13 +51,14 @@ export default function Home() {
 
   return (
     <div className="space-y-6 pb-2">
-      {/* 顶部 Banner — 纯白卡片 */}
-      <Card className="!p-5 !border-0 !rounded-[20px] bg-white">
-        {isLoggedIn && currentUser ? (
+      {/* 顶部 Banner — 苏科大品牌 */}
+      {isLoggedIn && currentUser ? (
+        <Card className="!p-5 !border-0 !rounded-[20px] bg-white">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-11 h-11 rounded-full bg-primary-bg flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-primary" strokeWidth={2} />
+              {/* 苏科大 Logo */}
+              <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center shadow-sm shadow-primary/20">
+                <span className="text-white text-base font-bold tracking-tighter">苏</span>
               </div>
               <div>
                 <h1 className="text-[17px] font-bold text-text-primary leading-tight tracking-[-0.01em]">
@@ -72,22 +73,24 @@ export default function Home() {
               <StatBadge label="学号" value={currentUser.student_id} />
             </div>
           </div>
-        ) : (
-          <div className="text-center py-3">
-            <div className="w-14 h-14 rounded-2xl bg-primary-bg flex items-center justify-center mx-auto mb-3">
-              <GraduationCap className="w-7 h-7 text-primary" strokeWidth={2} />
-            </div>
-            <h1 className="text-[17px] font-bold text-text-primary mb-1">苏州科技大学</h1>
-            <p className="text-sm text-text-tertiary mb-4">校园综合服务平台</p>
-            <div className="flex gap-2 justify-center">
-              <Button variant="primary" size="sm" onClick={() => nav('/login')}>登录</Button>
-              <Button variant="outline" size="sm" onClick={() => nav('/register')}>注册</Button>
-            </div>
+        </Card>
+      ) : (
+        <Card className="!p-6 !border-0 !rounded-[20px] bg-white text-center">
+          {/* 苏科大 Logo 大尺寸 */}
+          <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-4 shadow-sm shadow-primary/20">
+            <span className="text-white text-2xl font-bold tracking-tighter">苏</span>
           </div>
-        )}
-      </Card>
+          <h1 className="text-lg font-bold text-text-primary mb-0.5">苏州科技大学</h1>
+          <p className="text-sm text-text-tertiary mb-1">校园综合服务平台</p>
+          <p className="text-xs text-text-tertiary/60 mb-4">二手市场 · 失物招领 · 跑腿 · 树洞 · 校园资讯</p>
+          <div className="flex gap-2 justify-center">
+            <Button variant="primary" size="md" onClick={() => nav('/login')}>登录</Button>
+            <Button variant="outline" size="md" onClick={() => nav('/register')}>注册</Button>
+          </div>
+        </Card>
+      )}
 
-      {/* 快捷入口 — 圆形图标 */}
+      {/* 快捷入口 */}
       <Section title="校园服务">
         <div className="grid grid-cols-4 gap-y-5 gap-x-2">
           <QuickEntry icon={ShoppingBag} label="二手市场" color="bg-[#FFF2E5] text-[#FF9500]" path="/market" />

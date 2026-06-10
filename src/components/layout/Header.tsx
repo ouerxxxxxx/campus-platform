@@ -1,11 +1,26 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '@/lib/store'
-import { ChevronLeft, GraduationCap } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 
 interface HeaderProps {
   title: string
   showBack?: boolean
   rightAction?: { icon: string; onClick: () => void; badge?: number }
+}
+
+/** 苏科大 Logo 徽章 */
+function SustLogo() {
+  return (
+    <div className="flex items-center gap-1.5">
+      <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center shadow-sm shadow-primary/20">
+        <span className="text-white text-xs font-bold tracking-tighter">苏</span>
+      </div>
+      <div className="flex flex-col leading-none">
+        <span className="text-[11px] font-semibold text-text-primary tracking-tight">苏科大</span>
+        <span className="text-[9px] text-text-tertiary tracking-tight">校园平台</span>
+      </div>
+    </div>
+  )
 }
 
 export function Header({ title, showBack, rightAction }: HeaderProps) {
@@ -16,17 +31,13 @@ export function Header({ title, showBack, rightAction }: HeaderProps) {
     <header className="sticky top-0 z-40 bg-white/[0.92] backdrop-blur-xl border-b border-[#E5E5EA] safe-top">
       <div className="flex items-center justify-between h-11 px-4 max-w-6xl mx-auto">
         {/* 左侧 */}
-        <div className="flex items-center gap-1 min-w-0 w-14">
+        <div className="flex items-center gap-1 min-w-0 w-[72px]">
           {showBack ? (
             <button onClick={() => navigate(-1)} className="p-1 -ml-1 rounded-lg hover:bg-gray-100 active:scale-95 transition-all">
               <ChevronLeft className="w-5 h-5 text-primary" strokeWidth={2.5} />
             </button>
           ) : (
-            <div className="flex items-center gap-1.5">
-              <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
-                <GraduationCap className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
-              </div>
-            </div>
+            <SustLogo />
           )}
         </div>
 
@@ -36,7 +47,7 @@ export function Header({ title, showBack, rightAction }: HeaderProps) {
         </h1>
 
         {/* 右侧 */}
-        <div className="flex items-center gap-0.5 w-14 justify-end">
+        <div className="flex items-center gap-0.5 w-[72px] justify-end">
           {rightAction && (
             <button onClick={rightAction.onClick} className="relative p-1 rounded-lg hover:bg-gray-100 active:scale-95 transition-all">
               <svg className="w-5 h-5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">

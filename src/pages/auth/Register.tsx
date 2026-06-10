@@ -48,8 +48,12 @@ export default function Register() {
   return (
     <div className="max-w-sm mx-auto pt-4">
       <div className="text-center mb-6">
-        <h1 className="text-xl font-bold text-text-primary">🎓 学生注册</h1>
-        <p className="text-sm text-text-tertiary mt-1">仅限本校学生注册</p>
+        <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-4 shadow-sm shadow-primary/20">
+          <span className="text-white text-2xl font-bold tracking-tighter">苏</span>
+        </div>
+        <h1 className="text-xl font-bold text-text-primary">苏州科技大学</h1>
+        <p className="text-sm text-text-primary/70 font-medium">校园综合服务平台</p>
+        <p className="text-xs text-text-tertiary mt-1.5">仅限本校学生注册</p>
       </div>
 
       <div className="space-y-3">
