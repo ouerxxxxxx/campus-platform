@@ -12,7 +12,7 @@ interface HeaderProps {
 function SustLogo() {
   return (
     <div className="flex items-center gap-1.5">
-      <img src="/favicon.svg" alt="苏州科技大学" className="w-7 h-7 rounded-lg shadow-sm shadow-primary/20" />
+      <img src="/logo.png" alt="苏州科技大学" className="w-7 h-7 rounded-lg shadow-sm shadow-primary/20" />
       <span className="text-[11px] font-semibold text-text-primary tracking-tight">苏州科技大学</span>
     </div>
   )

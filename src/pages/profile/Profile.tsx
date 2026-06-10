@@ -117,7 +117,7 @@ export default function Profile() {
       </Button>
 
       <div className="text-center pb-4 pt-2">
-        <img src="/favicon.svg" alt="苏州科技大学" className="w-10 h-10 mx-auto mb-2 rounded-xl shadow-sm shadow-primary/10" />
+        <img src="/logo.png" alt="苏州科技大学" className="w-10 h-10 mx-auto mb-2 rounded-xl shadow-sm shadow-primary/10" />
         <p className="text-xs text-text-tertiary">苏州科技大学校园综合服务平台</p>
         <p className="text-[10px] text-text-tertiary/60">v1.0.0</p>
       </div>

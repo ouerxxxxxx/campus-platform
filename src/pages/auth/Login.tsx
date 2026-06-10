@@ -37,7 +37,7 @@ export default function Login() {
   return (
     <div className="max-w-sm mx-auto pt-8">
       <div className="text-center mb-8">
-        <img src="/favicon.svg" alt="苏州科技大学" className="w-16 h-16 mx-auto mb-4 rounded-2xl shadow-sm shadow-primary/20" />
+        <img src="/logo.png" alt="苏州科技大学" className="w-16 h-16 mx-auto mb-4 rounded-2xl shadow-sm shadow-primary/20" />
         <h1 className="text-xl font-bold text-text-primary">苏州科技大学</h1>
         <p className="text-sm text-text-primary/70 font-medium">校园综合服务平台</p>
         <p className="text-xs text-text-tertiary mt-1.5">使用学号登录</p>
