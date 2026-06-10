@@ -8,16 +8,14 @@ interface HeaderProps {
   rightAction?: { icon: string; onClick: () => void; badge?: number }
 }
 
-/** 苏科大 Logo 徽章 */
+/** 苏科大 Logo */
 function SustLogo() {
   return (
     <div className="flex items-center gap-1.5">
-      <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center shadow-sm shadow-primary/20">
-        <span className="text-white text-xs font-bold tracking-tighter">苏</span>
-      </div>
+      <img src="/favicon.svg" alt="苏科大" className="w-7 h-7 rounded-lg shadow-sm shadow-primary/20" />
       <div className="flex flex-col leading-none">
         <span className="text-[11px] font-semibold text-text-primary tracking-tight">苏科大</span>
-        <span className="text-[9px] text-text-tertiary tracking-tight">校园平台</span>
+        <span className="text-[9px] text-text-tertiary">校园平台</span>
       </div>
     </div>
   )
